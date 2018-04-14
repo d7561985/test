@@ -1,0 +1,20 @@
+workspace:
+  base: /go
+  path: src/bitbucket.org/easy7/slots/apollo_games
+clone:
+  git:
+   image: plugins/git
+   path: bitbucket.org/easy7/core
+pipeline:
+  build:
+    image: golang:latest
+    commands:
+      - go get
+      - go install
+      - go test
+  slack-notification:
+    image: plugins/slack
+    webhook: https://hooks.slack.com/services/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
+    username: drone-ci
+    channel: build
+    icon_emoji: ":rocket:"
